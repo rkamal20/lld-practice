@@ -14,5 +14,7 @@ public class Main {
         System.out.println("Total Cost: " + coffee.cost());
 
         System.out.println();
+
+        System.out.println("Added decorator design pattern");
     }
 }
