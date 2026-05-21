@@ -1,0 +1,6 @@
+package src.designpatterns.creational.factory;
+
+public interface Notification {
+    
+    public void send(String message);
+}

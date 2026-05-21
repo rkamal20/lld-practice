@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Keep git config files
+!.gitignore
+
+# Allow src folder
+!/src/
+!/src/**
