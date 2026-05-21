@@ -18,7 +18,7 @@ public class Main {
 
         e.addExpense(300, u1, Arrays.asList(u1, u2, u3), new EqualStrategy());
         e.addExpense(100, u2, Arrays.asList(u2, u3), new EqualStrategy());
-        e.addExpense(200, u3, Arrays.asList(u1), new EqualStrategy());
+        e.addExpense(200, u3, List.of(u1), new EqualStrategy());
   
         e.showBalances();    
 
