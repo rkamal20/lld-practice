@@ -28,8 +28,6 @@ public class Main {
         p.exitVehicle(ticket3 != null ? ticket3.id : null);
 
         System.out.println();
-
-        System.out.println("Design Parking Lot");
     }
 
     private static void sleep(int millis) {
