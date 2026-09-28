@@ -1,0 +1,9 @@
+package src.designpattern.factory;
+
+public class PushNotification implements Notification  {
+    
+    @Override
+    public void send(String message) {
+        System.out.println("Push: " + message);
+    }
+}

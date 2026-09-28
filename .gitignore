@@ -7,3 +7,7 @@
 # Allow src folder
 !/src/
 !/src/**
+
+# Ignore macOS metadata files
+.DS_Store
+**/.DS_Store
