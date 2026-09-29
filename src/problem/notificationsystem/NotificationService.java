@@ -6,7 +6,7 @@ public class NotificationService {
     
     public void sendNotification(User user, Notification notification, List<ChannelType> channelTypes) {
         for (ChannelType channelType : channelTypes) {
-            NotificationChannel channel = ChannelFactory.getChannel(channelType.name());
+            NotificationChannel channel = ChannelFactory.getChannel(channelType);
             if (channel != null) {
                 channel.sendNotification(user, notification);
             } else {
