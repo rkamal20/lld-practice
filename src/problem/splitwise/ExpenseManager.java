@@ -17,9 +17,10 @@ public class ExpenseManager {
         users.add(user);
     }
 
-    public void addExpense(double amount, User paidBy, List<User> participatedUsers, SplitStrategy strategy) {
-        List<Split> splits = strategy.split(amount, participatedUsers);
+    public void addExpense(double amount, User paidBy, List<User> participatedUsers, List<Integer> values, SplitStrategy strategy) {
+        List<Split> splits = strategy.split(amount, participatedUsers, values);
         balanceSheet.updateBalance(paidBy, splits);
+        expenses.add(new Expense(amount, paidBy, splits));
     }
 
     public void simplifyExpenses() {
@@ -31,6 +32,11 @@ public class ExpenseManager {
     }
 
     public void showAllExpenses() {
-        // Later
+        for (Expense expense : expenses) {
+            System.out.println("Expense of amount " + expense.amount + " paid by " + expense.paidBy.name);
+            for (Split split : expense.splits) {
+                System.out.println("  " + split.user.name + " owes " + split.amount);
+            }
+        }
     }
 }

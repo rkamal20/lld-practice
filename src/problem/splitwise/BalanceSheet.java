@@ -30,14 +30,17 @@ public class BalanceSheet {
 
     public void simplifyBalances() {
         Map<User, Double> userMap = new HashMap<>();
+
         for(User debtor : balances.keySet()) {
             for(User creditor : balances.get(debtor).keySet()) {
                 userMap.put(debtor, userMap.getOrDefault(debtor, 0.0) - balances.get(debtor).get(creditor));
                 userMap.put(creditor, userMap.getOrDefault(creditor, 0.0) + balances.get(debtor).get(creditor));
             }
         }
-        PriorityQueue<UserBalance> debtUsers = new PriorityQueue<>((s1, s2) -> (int) Math.ceil(s2.amount - s1.amount));
-        PriorityQueue<UserBalance> creditUsers = new PriorityQueue<>((s1, s2) -> (int) Math.ceil(s2.amount - s1.amount));
+
+        PriorityQueue<UserBalance> debtUsers = new PriorityQueue<>((u1, u2) -> Double.compare(u2.amount, u1.amount));
+        PriorityQueue<UserBalance> creditUsers = new PriorityQueue<>((u1, u2) -> Double.compare(u2.amount, u1.amount));
+        
         for(User u : userMap.keySet()) {
             if(userMap.get(u) == 0) continue;
             double amount = userMap.get(u);
@@ -45,7 +48,9 @@ public class BalanceSheet {
             if(amount < 0) debtUsers.offer(ub);
             if(amount > 0) creditUsers.offer(ub);
         }
+
         System.out.println(".......Simplified Expenses..........");
+        
         while (!debtUsers.isEmpty() && !creditUsers.isEmpty()) {
             double min = Math.min(creditUsers.peek().amount, debtUsers.peek().amount);
             UserBalance creditor = creditUsers.poll();

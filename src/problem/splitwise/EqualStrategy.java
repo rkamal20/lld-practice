@@ -5,7 +5,8 @@ import java.util.*;
 public class EqualStrategy implements SplitStrategy {
 
     @Override
-    public List<Split> split(double amount, List<User> users) {
+    public List<Split> split(double amount, List<User> users, List<Integer> values) {
+
         List<Split> splits = new ArrayList<>();
         double share = amount / users.size();
         for(User user : users) {
