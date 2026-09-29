@@ -3,7 +3,10 @@ package src.problem.loggingframework;
 import java.util.*;
 
 public class Logger {
-    private static Logger instance;
+
+    private static class Holder {
+        private static final Logger INSTANCE = new Logger();
+    }
     
     private LogLevel level;
     private List<Appender> appenders; 
@@ -13,10 +16,7 @@ public class Logger {
     }
 
     public static Logger getInstance() {
-        if(instance == null) {
-            instance = new Logger();
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 
     public void setLevel(LogLevel level) {
@@ -28,7 +28,8 @@ public class Logger {
     }
 
     private void log(LogLevel level, String message) {
-        if(level.ordinal() <= this.level.ordinal()) return;
+        if(level.ordinal() < this.level.ordinal()) return;
+
         LogMessage logMessage = new LogMessage(level, message);
         for(Appender appender : appenders) {
             appender.append(logMessage);
@@ -41,6 +42,10 @@ public class Logger {
 
     public void info(String message) {
         this.log(LogLevel.INFO, message);
+    }
+
+    public void warn(String message) {
+        this.log(LogLevel.WARN, message);
     }
 
     public void error(String message) {

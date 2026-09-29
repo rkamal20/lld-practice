@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class LogMessage {
     LogLevel level;
-    String timeStamp;
     String message;
+    String timeStamp;
 
     public LogMessage(LogLevel level, String message) {
         this.level = level;
